@@ -1,0 +1,3 @@
+// zoo-erp/settings.gradle
+
+rootProject.name = 'zoo-erp'
