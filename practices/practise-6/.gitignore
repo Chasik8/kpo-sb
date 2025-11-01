@@ -12,23 +12,11 @@ bin
 **/logs/
 
 # Ignore Gradle project-specific cache directory
-*.gradle
+.gradle
+!gradle/wrapper/gradle-wrapper.jar
 
 # Ignore Gradle build output directory
-*build
-
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
-!**/src/main/**/out/
-!**/src/test/**/out/
-**/logs/
-.settings
-bin
-.project*
-.classpath
-.factorypath
-out/
+build
 
 ### IntelliJ IDEA ###
 .idea/
@@ -41,5 +29,3 @@ out/
 
 ### Mac OS ###
 .DS_Store
-
-*gradle
