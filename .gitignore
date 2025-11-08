@@ -43,3 +43,5 @@ out/
 .DS_Store
 
 *gradle
+
+*src*.7z
