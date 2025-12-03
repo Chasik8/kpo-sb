@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  gateway-service:
+    build:
+      context: .
+      dockerfile: gateway-service/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - FILE_SERVICE_URL=http://file-storage-service:8081
+      - ANALYSIS_SERVICE_URL=http://analysis-service:8082
+    depends_on:
+      - file-storage-service
+      - analysis-service
+    networks:
+      - university-net
+
+  file-storage-service:
+    build:
+      context: .
+      dockerfile: file-storage-service/Dockerfile
+    ports:
+      - "8081:8081"
+    networks:
+      - university-net
+
+  analysis-service:
+    build:
+      context: .
+      dockerfile: analysis-service/Dockerfile
+    ports:
+      - "8082:8082"
+    depends_on:
+      - file-storage-service
+    networks:
+      - university-net
+
+networks:
+  university-net:
+    driver: bridge

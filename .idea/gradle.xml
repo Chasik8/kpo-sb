@@ -4,10 +4,13 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/homework/hw2" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/homework/hw3" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/homework/hw2" />
+            <option value="$PROJECT_DIR$/homework/hw3" />
+            <option value="$PROJECT_DIR$/homework/hw3/analysis-service" />
+            <option value="$PROJECT_DIR$/homework/hw3/file-storage-service" />
+            <option value="$PROJECT_DIR$/homework/hw3/gateway-service" />
           </set>
         </option>
       </GradleProjectSettings>
