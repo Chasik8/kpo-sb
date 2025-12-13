@@ -3,6 +3,7 @@ package hse.kpo.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hse.kpo.controllers.CustomerResponse;
+import hse.kpo.domains.Customer;
 import hse.kpo.kafka.TrainingCompletedEvent;
 import hse.kpo.kafka.outbox.OutboxEvent;
 import hse.kpo.kafka.outbox.OutboxEventRepository;
@@ -10,6 +11,8 @@ import hse.kpo.repositories.CustomerRepository;
 import hse.kpo.utils.CustomerResponseUtils;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -43,10 +46,16 @@ public class TrainingService {
         return "Тренировка завершена! Параметры обновлены";
     }
 
+    @Cacheable(value = "customers")
     public List<CustomerResponse> getAllCustomers() {
         return repository.findAll().stream()
                 .map(CustomerResponseUtils::convertToResponse)
                 .collect(Collectors.toList());
+    }
+
+    @CacheEvict("customers")
+    public void saveCustomer(Customer customer) {
+        repository.save(customer);
     }
 
     //В идеале сделать отдельный сервис

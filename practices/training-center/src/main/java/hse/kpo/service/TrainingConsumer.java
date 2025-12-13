@@ -4,6 +4,7 @@ import hse.kpo.domains.Customer;
 import hse.kpo.kafka.CustomerAddedEvent;
 import hse.kpo.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TrainingConsumer {
     @Autowired
-    private CustomerRepository repository;
+    private TrainingService service;
 
     @KafkaListener(topics = "customers", groupId = "kpo")
     public void handleCustomerEvent(CustomerAddedEvent event) {
@@ -23,6 +24,6 @@ public class TrainingConsumer {
             event.legPower(),
             event.iq()
         );
-        repository.save(customer);
+        service.saveCustomer(customer);
     }
 }
